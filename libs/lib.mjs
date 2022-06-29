@@ -31,7 +31,10 @@ export function useJSONManager() {
   }
 
   async function update() {
-    const result = await writeFile(state.path, JSON.stringify(state.data));
+    const result = await writeFile(
+      state.path,
+      JSON.stringify(state.data, null, 2)
+    );
     if (!result) {
       console.log(chalk.red("Error"), "update config error");
       return false;

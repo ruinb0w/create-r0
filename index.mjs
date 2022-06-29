@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
 import chalk from "chalk";
-import { check_dependencies } from "./lib.mjs";
-import { dependecies_list } from "./data.mjs";
-import { questionConfig, configProject } from "./config.mjs";
-import { promisedExecFile } from "./promised_api.mjs";
+import { check_dependencies } from "./libs/lib.mjs";
+import { dependecies_list } from "./libs/data.mjs";
+import { questionConfig, configProject } from "./libs/config.mjs";
+import { promisedExecFile } from "./libs/promised_api.mjs";
 
 async function main() {
   console.log(chalk.blue("checking dependecies..."));
