@@ -1,6 +1,6 @@
 {
   "name": "create-r0",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "main": "index.mjs",
   "scripts": {
@@ -8,6 +8,7 @@
   },
   "keywords": [],
   "author": "ruinb0w",
+  "repository": "https://github.com/ruinb0w/create-r0",
   "bin": {
     "create-hello": "./index.mjs"
   },
