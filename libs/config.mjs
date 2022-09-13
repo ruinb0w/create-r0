@@ -11,6 +11,11 @@ export async function questionConfig() {
     case "vue3":
       template_config = await vue3Config();
       break;
+    case "electron":
+      template_config = await electronConfig();
+      break;
+    case "back-end":
+      template_config = await backendConfig();
   }
   const extend_config = await extendConfig();
   return { ...basic_config, ...template_config, ...extend_config };
@@ -28,8 +33,19 @@ async function basicConfig() {
     {
       name: "template",
       type: "list",
-      choices: ["uni-app", "vue3"],
+      choices: ["uni-app", "vue3", "electron", "back-end"],
       default: 0,
+    },
+    {
+      name: "style",
+      type: "confirm",
+      message: "Use sass?",
+      default: true,
+    },
+    {
+      name: "language",
+      type: "list",
+      choices: ["typescript", "javascript"],
     },
   ]);
 }
@@ -45,6 +61,8 @@ async function uniAppConfig() {
 }
 
 async function vue3Config() {}
+async function electronConfig() {}
+async function backendConfig() {}
 
 async function extendConfig() {
   return await inquirer.prompt({
