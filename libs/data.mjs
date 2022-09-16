@@ -15,4 +15,7 @@ export const templates = {
   electron: {
     url: "https://github.com/ruinb0w/electron-boilerplate.git",
   },
+  "back-end": {
+    url: "https://github.com/ruinb0w/back-end-boilerplate.git",
+  },
 };
