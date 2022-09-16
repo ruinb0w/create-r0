@@ -10,7 +10,7 @@ export const templates = {
     url: "https://gitee.com/ruinb0w/vue-template.git",
   },
   "uni-app": {
-    url: "https://gitee.com/ruinb0w/uni-template.git",
+    url: "https://github.com/ruinb0w/uni-boilerplate.git",
   },
   electron: {
     url: "https://github.com/ruinb0w/electron-boilerplate.git",
