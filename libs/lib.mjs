@@ -1,8 +1,6 @@
 import chalk from "chalk";
-import { promisedExecFile } from "./promised_api.mjs";
-import { readFile, writeFile } from "./promised_api.mjs";
-import { promisedExecFile } from "./libs/promised_api.mjs";
-import { templates } from "./libs/data.mjs";
+import { promisedExecFile, readFile, writeFile } from "./promised_api.mjs";
+import { templates } from "./data.mjs";
 
 /*
  * Run a command to make sure the dependencies are installed.
@@ -41,7 +39,7 @@ export async function downloadTemplate(config) {
   console.log(chalk.blue("downloading template..."));
   const download_status = await promisedExecFile("git", [
     "clone",
-    templates[config.template],
+    templates[config.template].url,
     config.project_name,
   ]);
   if (download_status) {
