@@ -13,6 +13,6 @@ export const templates = {
     url: "https://gitee.com/ruinb0w/uni-template.git",
   },
   electron: {
-    url: "https://gitee.com/ruinb0w/electron-vue-template.git",
+    url: "https://github.com/ruinb0w/electron-boilerplate.git",
   },
 };
