@@ -40,3 +40,16 @@ export function writeFile(path, data) {
     });
   });
 }
+
+export function rm(path) {
+  return new Promise((resolve) => {
+    fs.rm(path, { recursive: true }, (err) => {
+      if (err) {
+        console.log(err);
+        resolve(false);
+      } else {
+        resolve(true);
+      }
+    });
+  });
+}

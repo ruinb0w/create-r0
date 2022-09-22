@@ -1,24 +1,24 @@
 import inquirer from "inquirer";
-import { useJSONManager } from "./lib.mjs";
+import { rm } from "./promised_api.mjs";
+import * as path from "path";
+import { uniapp } from "./config/uniapp.mjs";
 
 export async function questionConfig() {
   const basic_config = await basicConfig();
-  let template_config;
   switch (basic_config.template) {
     case "uni-app":
-      template_config = await uniAppConfig();
+      await uniapp.query();
       break;
     case "vue3":
-      template_config = await vue3Config();
+      await vue3Config();
       break;
     case "electron":
-      template_config = await electronConfig();
+      await electronConfig();
       break;
     case "back-end":
-      template_config = await backendConfig();
+      await backendConfig();
   }
-  // const extend_config = await extendConfig();
-  return { ...basic_config, ...template_config };
+  return basic_config;
 }
 
 async function basicConfig() {
@@ -36,53 +36,17 @@ async function basicConfig() {
       choices: ["uni-app", "vue3", "electron", "back-end"],
       default: 0,
     },
-    // {
-    // name: "style",
-    // type: "confirm",
-    // message: "Use sass?",
-    // default: true,
-    // },
-    // {
-    // name: "language",
-    // type: "list",
-    // choices: ["typescript", "javascript"],
-    // },
   ]);
-}
-
-async function uniAppConfig() {
-  return await inquirer.prompt({
-    name: "APP_ID",
-    type: "input",
-    validate(data) {
-      return data.length > 0 || "please input appid";
-    },
-  });
 }
 
 async function vue3Config() {}
 async function electronConfig() {}
 async function backendConfig() {}
 
-// async function extendConfig() {
-// return await inquirer.prompt({
-// name: "scss",
-// type: "confirm",
-// });
-// }
-
 export async function configProject(config) {
   switch (config.template) {
     case "uni-app":
-      await configUniApp(config);
+      await uniapp.configure(config);
   }
-}
-
-async function configUniApp(config) {
-  const json_manager = useJSONManager();
-  const { state } = json_manager;
-  await json_manager.read(config.project_name + "/src/manifest.json");
-  state.data["mp-weixin"].appid = config.APP_ID;
-  state.data.name = config.project_name;
-  json_manager.update();
+  await rm(path.join(path.resolve(), config.project_name, ".git"));
 }

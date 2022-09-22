@@ -77,7 +77,20 @@ export function useJSONManager() {
     state.data = JSON.parse(result);
   }
 
-  async function update() {
+  function update(keys, value) {
+    if (typeof keys != "string") return;
+    const key_line = keys.split(".");
+    let target = state.data;
+    if (key_line.length > 1) {
+      for (let i = 0; i < key_line.length - 1; i++) {
+        if (!target[key_line[i]]) throw `there is no arg ${target[key_line[i]]} in ${target}`;
+        target = target[key_line[i]];
+      }
+    }
+    target[key_line.length - 1] = value;
+  }
+
+  async function write() {
     const result = await writeFile(state.path, JSON.stringify(state.data, null, 2));
     if (!result) {
       console.log(chalk.red("Error"), "update config error");
@@ -88,6 +101,7 @@ export function useJSONManager() {
   return {
     state,
     read,
+    write,
     update,
   };
 }
