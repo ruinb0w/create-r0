@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.mjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "keywords": [],
   "author": "ruinb0w",
@@ -16,5 +16,12 @@
   "dependencies": {
     "chalk": "^5.0.1",
     "inquirer": "^9.0.0"
+  },
+  "devDependencies": {},
+  "jest": {
+    "testMatch": [
+      "**/tests/**/*.(m)js?(x)",
+      "**/?(*.)+(spec|test).(m)js?(x)"
+    ]
   }
 }

@@ -12,6 +12,9 @@ export const templates = {
   "uni-app": {
     url: "https://github.com/ruinb0w/uni-boilerplate.git",
   },
+  "uni-app-ts": {
+    url: "https://github.com/ruinb0w/uni-ts-boilerplate.git",
+  },
   electron: {
     url: "https://github.com/ruinb0w/electron-boilerplate.git",
   },

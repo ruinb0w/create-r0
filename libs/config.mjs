@@ -1,13 +1,14 @@
 import inquirer from "inquirer";
 import { rm } from "./promised_api.mjs";
 import * as path from "path";
-import { uniapp } from "./config/uniapp.mjs";
+import { uniConfig, configUni } from "./config/uni.mjs";
 
 export async function questionConfig() {
   const basic_config = await basicConfig();
+  let equipmentConfig;
   switch (basic_config.template) {
     case "uni-app":
-      await uniapp.query();
+      equipmentConfig = await uniConfig(basic_config);
       break;
     case "vue3":
       await vue3Config();
@@ -18,11 +19,11 @@ export async function questionConfig() {
     case "back-end":
       await backendConfig();
   }
-  return basic_config;
+  return equipmentConfig || basic_config;
 }
 
-async function basicConfig() {
-  return await inquirer.prompt([
+function basicConfig() {
+  return inquirer.prompt([
     {
       name: "project_name",
       type: "input",
@@ -46,7 +47,7 @@ async function backendConfig() {}
 export async function configProject(config) {
   switch (config.template) {
     case "uni-app":
-      await uniapp.configure(config);
+      await configUni(config);
   }
   await rm(path.join(path.resolve(), config.project_name, ".git"));
 }

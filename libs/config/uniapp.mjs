@@ -4,13 +4,21 @@ import inquirer from "inquirer";
 export const uniapp = {
   options: {},
   async query() {
-    this.options = await inquirer.prompt({
-      name: "APP_ID",
-      type: "input",
-      validate(data) {
-        return data.length > 0 || "please input appid";
+    this.options = await inquirer.prompt([
+      {
+        name: "APP_ID",
+        type: "input",
+        validate(data) {
+          return data.length > 0 || "please input appid";
+        },
       },
-    });
+      {
+        name: "language",
+        type: "list",
+        choices: ["js", "ts"],
+        default: 0,
+      },
+    ]);
   },
   async configure(config) {
     const json_manager = useJSONManager();
